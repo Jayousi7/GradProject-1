@@ -1,0 +1,23 @@
+# Virtual Environments
+.venv/
+venv/
+env/
+
+# IDEs
+.idea/
+.vscode/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Project Output and Results
+results/
+plots/
+*.pth
+training_history.json
+performance_metrics.csv
+
+# Optional: Ignore the Dataset Directory if it's too large for GitHub
+# Jordan/
