@@ -15,7 +15,7 @@ __pycache__/
 # Project Output and Results
 results/
 results.zip
-./Jordan/
+Jordan/
 plots/
 *.pth
 training_history.json
