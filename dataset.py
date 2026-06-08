@@ -39,8 +39,16 @@ def create_sliding_windows(features, targets, raw_returns, company_name, window_
     return np.array(w_features), np.array(w_targets), np.array(w_raw_returns), w_company_names
 
 def prepare_data(data_dir="Jordan", window_size=5, seed=42):
-    csv_files = [f for f in os.listdir(data_dir) if f.endswith('.csv')]
-    
+    csv_files = []
+    for root, dirs, files in os.walk(data_dir):
+        for file in files:
+            if file.endswith('.csv'):
+                rel_dir = os.path.relpath(root, data_dir)
+                if rel_dir == '.':
+                    csv_files.append(file)
+                else:
+                    csv_files.append(os.path.join(rel_dir, file).replace('\\', '/'))
+                    
     # Randomly shuffle and split companies
     random.seed(seed)
     random.shuffle(csv_files)
@@ -84,7 +92,8 @@ def prepare_data(data_dir="Jordan", window_size=5, seed=42):
             raw_ret = df['next_day_return_value'].values
             features = df[features_cols].values
             
-            comp_data[f] = (features, target, raw_ret)
+            comp_name = os.path.basename(f).replace('.csv', '')
+            comp_data[comp_name] = (features, target, raw_ret)
             features_list.append(features)
         return comp_data, features_list
 
