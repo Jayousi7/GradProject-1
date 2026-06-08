@@ -43,7 +43,7 @@ def train_model(results_dir, epochs=30, batch_size=32, lr=1e-3, weight_decay=1e-
     train_loader, eval_loader, _ = get_dataloaders(window_size=window_size, batch_size=batch_size)
     
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    
+    print(device.type)
     model = TimeSeriesClassifier(hidden_dim=hidden_dim).to(device)
     criterion = StockTanhLoss()
     optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
