@@ -3,7 +3,7 @@ import json
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay, roc_curve, auc
+from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay, roc_curve, auc, accuracy_score, f1_score
 import os
 
 from dataset import get_dataloaders
@@ -66,14 +66,14 @@ def get_predictions(model, dataloader, device):
             
     return np.array(all_targets), np.array(all_logits), np.array(all_raw_returns), np.array(all_company_names)
 
-def evaluate_model(results_dir, window_size=5):
+def evaluate_model(results_dir, window_size=5, hidden_dim=32):
     plots_dir = os.path.join(results_dir, "plots")
     os.makedirs(plots_dir, exist_ok=True)
     
     _, _, test_loader = get_dataloaders(window_size=window_size, batch_size=32)
     
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    model = TimeSeriesClassifier().to(device)
+    model = TimeSeriesClassifier(hidden_dim=hidden_dim).to(device)
     model_path = os.path.join(results_dir, "best_model.pth")
     
     if not os.path.exists(model_path):
@@ -88,8 +88,39 @@ def evaluate_model(results_dir, window_size=5):
     
     print(f"\nEvaluating Model: {results_dir}")
     
-    # 1. Standard Classification Metrics
-    y_pred, y_probs, cm = calculate_classification_metrics(y_true, y_pred_logits)
+    # 1. Standard Classification Metrics (Supplementary via Binarization)
+    y_true_bin = (y_true > 0).astype(int)
+    y_pred, y_probs, cm = calculate_classification_metrics(y_true_bin, y_pred_logits)
+    
+    test_acc = accuracy_score(y_true_bin, y_pred)
+    test_f1 = f1_score(y_true_bin, y_pred, zero_division=0)
+    
+    # Calculate global Test ROI (Mean Step Multiplier)
+    test_roi = np.exp(np.tanh(y_pred_logits) * y_true).mean()
+    
+    # Extract Train/Val metrics from history and save final metrics JSON
+    history_path = os.path.join(results_dir, "training_history.json")
+    if os.path.exists(history_path):
+        with open(history_path, "r") as f:
+            history = json.load(f)
+            
+        best_epoch = np.argmax(history['val_roi'])
+        metrics = {
+            "train_roi": history['train_roi'][best_epoch],
+            "val_roi": history['val_roi'][best_epoch],
+            "test_roi": float(test_roi),
+            "test_acc_bin": float(test_acc),
+            "test_f1_bin": float(test_f1)
+        }
+    else:
+        metrics = {
+            "test_roi": float(test_roi),
+            "test_acc_bin": float(test_acc),
+            "test_f1_bin": float(test_f1)
+        }
+        
+    with open(os.path.join(results_dir, "final_metrics.json"), "w") as f:
+        json.dump(metrics, f, indent=4)
     
     # Save global Confusion Matrix
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=[0, 1])
@@ -102,9 +133,8 @@ def evaluate_model(results_dir, window_size=5):
     unique_companies = np.unique(company_names)
     
     # Plotting ROI
-    plt.figure(figsize=(14, 8))
-    
     for comp in unique_companies:
+        plt.figure(figsize=(14, 8))
         mask = (company_names == comp)
         comp_logits = y_pred_logits[mask]
         comp_percent_changes = percent_changes[mask]
@@ -127,15 +157,15 @@ def evaluate_model(results_dir, window_size=5):
         plt.plot(cum_ret_tanh, label=f'{comp} - Stock Tanh', linestyle='--')
         plt.plot(baseline_cum_ret, label=f'{comp} - Baseline', linestyle=':', alpha=0.5)
 
-    plt.axhline(y=1.0, color='r', linestyle='-', alpha=0.3, label='Breakeven')
-    plt.title('Cumulative ROI on Test Set (Per Company & Algorithm)')
-    plt.xlabel('Trade Steps')
-    plt.ylabel('Cumulative Return Multiplier')
-    plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-    plt.grid(True)
-    plt.tight_layout()
-    plt.savefig(os.path.join(plots_dir, 'cumulative_roi_algorithms.png'))
-    plt.close()
+        plt.axhline(y=1.0, color='r', linestyle='-', alpha=0.3, label='Breakeven')
+        plt.title(f'Cumulative ROI on Test Set - {comp}')
+        plt.xlabel('Trade Steps')
+        plt.ylabel('Cumulative Return Multiplier')
+        plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+        plt.grid(True)
+        plt.tight_layout()
+        plt.savefig(os.path.join(plots_dir, f'cumulative_roi_{comp.replace(".csv", "")}.png'))
+        plt.close()
     
     # Training History Plots (if exists)
     history_path = os.path.join(results_dir, "training_history.json")
@@ -155,14 +185,14 @@ def evaluate_model(results_dir, window_size=5):
         plt.close()
         
         plt.figure(figsize=(10, 6))
-        plt.plot(history['train_f1'], label='Train F1 Score')
-        plt.plot(history['val_f1'], label='Validation F1 Score')
-        plt.title('Training vs Validation F1 Score')
+        plt.plot(history['train_roi'], label='Train Mean ROI')
+        plt.plot(history['val_roi'], label='Validation Mean ROI')
+        plt.title('Training vs Validation Mean ROI')
         plt.xlabel('Epochs')
-        plt.ylabel('F1 Score')
+        plt.ylabel('Mean ROI Multiplier')
         plt.legend()
         plt.grid(True)
-        plt.savefig(os.path.join(plots_dir, 'f1_curve.png'))
+        plt.savefig(os.path.join(plots_dir, 'roi_curve.png'))
         plt.close()
 
 if __name__ == "__main__":

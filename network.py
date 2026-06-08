@@ -4,11 +4,11 @@ from torch import nn
 from models import CNNEmbedding
 
 class TimeSeriesClassifier(nn.Module):
-    def __init__(self, input_dim=6, cnn_output_dim=120, hidden_dim=32):
+    def __init__(self, input_dim=6, cnn_output_dim=120, hidden_dim=32, num_layers=2):
         super().__init__()
         
         self.cnn = CNNEmbedding(input_dim=input_dim, output_dim=cnn_output_dim)
-        self.lstm = nn.LSTM(input_size=cnn_output_dim, hidden_size=hidden_dim, batch_first=True, bidirectional=True, num_layers=5, dropout=0.5)
+        self.lstm = nn.LSTM(input_size=cnn_output_dim, hidden_size=hidden_dim, batch_first=True, bidirectional=True, num_layers=num_layers, dropout=0.5)
         
         self.projection = nn.Linear(hidden_dim * 2, 16)
         self.projection1 = nn.Linear(16, 16)

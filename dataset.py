@@ -63,20 +63,24 @@ def prepare_data(data_dir="Jordan", window_size=5, seed=42):
             path = os.path.join(data_dir, f)
             df = pd.read_csv(path)
             
-            df['next_day_return_value'] = df['return_value'].shift(-1)
+            df['next_day_return_value'] = df['Return'].shift(-1)
             df = df.iloc[:-1].copy()
             df['is_market_open'] = 1 - df['is_closed']
             
-            features_cols = [
-                'return_value', 
-                'rsi_14', 
-                'macd_line', 
-                'normalized_spread', 
-                'vroc_5d', 
-                'is_market_open'
-            ]
+            # Apply rolling window normalization to continuous features
+            continuous_cols = ['Return', 'RSI', 'MACD', 'Spread', 'VROC']
+            rolling_window = window_size
             
-            target = (df['next_day_return_value'] > 0).astype(float).values
+            rolling_mean = df[continuous_cols].rolling(window=rolling_window, min_periods=1).mean()
+            rolling_std = df[continuous_cols].rolling(window=rolling_window, min_periods=1).std()
+            rolling_std = rolling_std.fillna(1.0)
+            rolling_std[rolling_std == 0] = 1.0
+            
+            df[continuous_cols] = (df[continuous_cols] - rolling_mean) / rolling_std
+            
+            features_cols = continuous_cols + ['is_market_open']
+            
+            target = df['next_day_return_value'].values
             raw_ret = df['next_day_return_value'].values
             features = df[features_cols].values
             
@@ -88,18 +92,9 @@ def prepare_data(data_dir="Jordan", window_size=5, seed=42):
     eval_data_dict, _ = load_company_data(eval_comps)
     test_data_dict, _ = load_company_data(test_comps)
     
-    # Calculate normalization stats using ONLY training data
-    train_all = np.vstack(train_features_list)
-    continuous_train = train_all[:, :5]
-    mean = np.mean(continuous_train, axis=0)
-    std = np.std(continuous_train, axis=0)
-    std[std == 0] = 1e-8
-    
     def process_dict_to_dataset(data_dict):
         all_w_f, all_w_t, all_w_r, all_w_c = [], [], [], []
         for comp_name, (features, target, raw_ret) in data_dict.items():
-            # Normalize
-            features[:, :5] = (features[:, :5] - mean) / std
             w_f, w_t, w_r, w_c = create_sliding_windows(features, target, raw_ret, comp_name, window_size)
             if len(w_f) > 0:
                 all_w_f.append(w_f)
