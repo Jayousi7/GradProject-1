@@ -24,29 +24,31 @@ def calculate_classification_metrics(y_true, y_pred_logits):
     print(cm)
     return y_pred, probs, cm
 
-def roi_stock_direction(y_pred_logits, percent_changes):
+def roi_stock_direction(y_pred_logits, log_returns):
     """
     ROI calculation going 'all in' based on output sign.
-    ROI = Prod(1 + sign(y_pred_logits) * percent_changes) - 1
+    Cumulative Log Return = sum(sign * log_returns)
+    Cumulative Multiplier = exp(Cumulative Log Return)
     """
-    # sign(x) is 1 for positive, -1 for negative, 0 for 0
     signs = np.sign(y_pred_logits)
-    # If logit is exactly 0, sign is 0. 
-    step_returns = signs * percent_changes
-    cumulative_returns = np.cumprod(1 + step_returns)
-    roi = cumulative_returns[-1] - 1 if len(cumulative_returns) > 0 else 0
-    return cumulative_returns, roi
+    step_log_returns = signs * log_returns
+    cumulative_log_returns = np.cumsum(step_log_returns)
+    cumulative_multipliers = np.exp(cumulative_log_returns)
+    roi = cumulative_multipliers[-1] - 1 if len(cumulative_multipliers) > 0 else 0
+    return cumulative_multipliers, roi
 
-def roi_stock_tanh(y_pred_logits, percent_changes):
+def roi_stock_tanh(y_pred_logits, log_returns):
     """
     ROI calculation scaling investment by tanh(y_pred_logits).
-    ROI = Prod(1 + tanh(y_pred_logits) * percent_changes) - 1
+    Cumulative Log Return = sum(tanh * log_returns)
+    Cumulative Multiplier = exp(Cumulative Log Return)
     """
     fractions = np.tanh(y_pred_logits)
-    step_returns = fractions * percent_changes
-    cumulative_returns = np.cumprod(1 + step_returns)
-    roi = cumulative_returns[-1] - 1 if len(cumulative_returns) > 0 else 0
-    return cumulative_returns, roi
+    step_log_returns = fractions * log_returns
+    cumulative_log_returns = np.cumsum(step_log_returns)
+    cumulative_multipliers = np.exp(cumulative_log_returns)
+    roi = cumulative_multipliers[-1] - 1 if len(cumulative_multipliers) > 0 else 0
+    return cumulative_multipliers, roi
 
 def get_predictions(model, dataloader, device):
     all_logits = []
@@ -144,7 +146,8 @@ def evaluate_model(results_dir, window_size=5, hidden_dim=32):
         cum_ret_tanh, roi_tanh = roi_stock_tanh(comp_logits, comp_percent_changes)
         
         # Baseline Buy and Hold
-        baseline_cum_ret = np.cumprod(1 + comp_percent_changes)
+        baseline_cum_log_ret = np.cumsum(comp_percent_changes)
+        baseline_cum_ret = np.exp(baseline_cum_log_ret)
         baseline_roi = baseline_cum_ret[-1] - 1 if len(baseline_cum_ret) > 0 else 0
         
         print(f"\n--- ROI Metrics for {comp} ---")
