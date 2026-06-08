@@ -7,7 +7,8 @@ This repository contains the initial results and baseline models for **Grad Proj
 Currently, this repository holds the foundation for evaluating the numerical trading components. 
 
 ## Features
-- **Company-Level Dataset Splitting:** Ensures accurate temporal splits of financial data without risking data leakage across multiple distinct companies.
+- **Chronological Sequence Splitting:** To eliminate cross-sectional look-ahead bias and memory bleed, the dataset is split strictly by chronological timeline for each company (70% Train, 15% Eval, 15% Test). A strict `window_size` purge zone is enforced between slices to guarantee test features never overlap with training sequences.
+- **Isolated Z-Score Normalization:** The continuous scalar parameters (mean and standard deviation) are calculated strictly on the training partition and broadcasted to the Evaluation and Test splits to prevent future volatility data leakage.
 - **Hyperparameter Grid Search:** Automated architecture testing across:
   - Learning Rate: `[1e-3, 1e-4]`
   - Weight Decay: `[1e-3, 1e-4]`

@@ -49,80 +49,95 @@ def prepare_data(data_dir="Jordan", window_size=5, seed=42):
                 else:
                     csv_files.append(os.path.join(rel_dir, file).replace('\\', '/'))
                     
-    # Randomly shuffle and split companies
-    random.seed(seed)
-    random.shuffle(csv_files)
+    all_train_f, all_train_t, all_train_r, all_train_c = [], [], [], []
+    all_eval_f,  all_eval_t,  all_eval_r,  all_eval_c  = [], [], [], []
+    all_test_f,  all_test_t,  all_test_r,  all_test_c  = [], [], [], []
     
-    # 9 Train, 2 Eval, 2 Test
-    train_comps = csv_files[:9]
-    eval_comps = csv_files[9:11]
-    test_comps = csv_files[11:13]
+    continuous_cols = ['Return', 'RSI', 'MACD', 'Spread', 'VROC']
+    features_cols = continuous_cols + ['is_market_open']
     
-    print(f"--- Data Split (Seed: {seed}) ---")
-    print(f"Train Companies (9): {train_comps}")
-    print(f"Eval Companies (2): {eval_comps}")
-    print(f"Test Companies (2): {test_comps}")
-    print("-----------------------------------")
-    
-    def load_company_data(comps):
-        comp_data = {}
-        features_list = []
-        for f in comps:
-            path = os.path.join(data_dir, f)
-            df = pd.read_csv(path)
+    for f in csv_files:
+        path = os.path.join(data_dir, f)
+        df = pd.read_csv(path)
+        
+        # 1. Sort Chronologically to prevent target index shift leakage
+        df['Date'] = pd.to_datetime(df['Date'])
+        df = df.sort_values('Date').reset_index(drop=True)
+        
+        # 2. Target Shift
+        df['next_day_return_value'] = df['Return'].shift(-1)
+        df = df.iloc[:-1].copy()
+        df['is_market_open'] = 1 - df['is_closed']
+        
+        # 3. Chronological Indices
+        n_samples = len(df)
+        train_end = int(n_samples * 0.7)
+        eval_end = int(n_samples * 0.85)
+        
+        # 4. Z-Score Normalization strictly on Train Split
+        train_df = df.iloc[:train_end]
+        train_mean = train_df[continuous_cols].mean()
+        train_std = train_df[continuous_cols].std()
+        
+        # Avoid division by zero
+        train_std = train_std.replace(0, 1.0)
+        
+        df[continuous_cols] = (df[continuous_cols] - train_mean) / train_std
+        
+        comp_name = os.path.basename(f).replace('.csv', '')
+        
+        def extract_slice(start_idx, end_idx):
+            if start_idx >= end_idx:
+                return None, None, None, None
+            slice_df = df.iloc[start_idx:end_idx]
+            features = slice_df[features_cols].values
+            target = slice_df['next_day_return_value'].values
+            raw_ret = slice_df['next_day_return_value'].values
             
-            df['next_day_return_value'] = df['Return'].shift(-1)
-            df = df.iloc[:-1].copy()
-            df['is_market_open'] = 1 - df['is_closed']
-            
-            # Apply rolling window normalization to continuous features
-            continuous_cols = ['Return', 'RSI', 'MACD', 'Spread', 'VROC']
-            rolling_window = window_size
-            
-            rolling_mean = df[continuous_cols].rolling(window=rolling_window, min_periods=1).mean()
-            rolling_std = df[continuous_cols].rolling(window=rolling_window, min_periods=1).std()
-            rolling_std = rolling_std.fillna(1.0)
-            rolling_std[rolling_std == 0] = 1.0
-            
-            df[continuous_cols] = (df[continuous_cols] - rolling_mean) / rolling_std
-            
-            features_cols = continuous_cols + ['is_market_open']
-            
-            target = df['next_day_return_value'].values
-            raw_ret = df['next_day_return_value'].values
-            features = df[features_cols].values
-            
-            comp_name = os.path.basename(f).replace('.csv', '')
-            comp_data[comp_name] = (features, target, raw_ret)
-            features_list.append(features)
-        return comp_data, features_list
-
-    train_data_dict, train_features_list = load_company_data(train_comps)
-    eval_data_dict, _ = load_company_data(eval_comps)
-    test_data_dict, _ = load_company_data(test_comps)
-    
-    def process_dict_to_dataset(data_dict):
-        all_w_f, all_w_t, all_w_r, all_w_c = [], [], [], []
-        for comp_name, (features, target, raw_ret) in data_dict.items():
+            # create_sliding_windows inherently requires `window_size` points to output 1 prediction.
+            # Passing consecutive slice blocks independently creates a natural Purge zone!
             w_f, w_t, w_r, w_c = create_sliding_windows(features, target, raw_ret, comp_name, window_size)
-            if len(w_f) > 0:
-                all_w_f.append(w_f)
-                all_w_t.append(w_t)
-                all_w_r.append(w_r)
-                all_w_c.extend(w_c)
-                
-        if not all_w_f:
-            return None
+            return w_f, w_t, w_r, w_c
+
+        # Train Slice
+        tr_f, tr_t, tr_r, tr_c = extract_slice(0, train_end)
+        if tr_f is not None and len(tr_f) > 0:
+            all_train_f.append(tr_f)
+            all_train_t.append(tr_t)
+            all_train_r.append(tr_r)
+            all_train_c.extend(tr_c)
             
-        final_f = np.concatenate(all_w_f)
-        final_t = np.concatenate(all_w_t)
-        final_r = np.concatenate(all_w_r)
+        # Eval Slice
+        ev_f, ev_t, ev_r, ev_c = extract_slice(train_end, eval_end)
+        if ev_f is not None and len(ev_f) > 0:
+            all_eval_f.append(ev_f)
+            all_eval_t.append(ev_t)
+            all_eval_r.append(ev_r)
+            all_eval_c.extend(ev_c)
+            
+        # Test Slice
+        te_f, te_t, te_r, te_c = extract_slice(eval_end, n_samples)
+        if te_f is not None and len(te_f) > 0:
+            all_test_f.append(te_f)
+            all_test_t.append(te_t)
+            all_test_r.append(te_r)
+            all_test_c.extend(te_c)
+
+    def build_dataset(f_list, t_list, r_list, c_list):
+        if not f_list:
+            return None
+        return TimeSeriesDataset(np.concatenate(f_list), np.concatenate(t_list), np.concatenate(r_list), c_list)
         
-        return TimeSeriesDataset(final_f, final_t, final_r, all_w_c)
-        
-    train_dataset = process_dict_to_dataset(train_data_dict)
-    eval_dataset = process_dict_to_dataset(eval_data_dict)
-    test_dataset = process_dict_to_dataset(test_data_dict)
+    train_dataset = build_dataset(all_train_f, all_train_t, all_train_r, all_train_c)
+    eval_dataset = build_dataset(all_eval_f, all_eval_t, all_eval_r, all_eval_c)
+    test_dataset = build_dataset(all_test_f, all_test_t, all_test_r, all_test_c)
+    
+    print(f"--- Chronological Data Split ---")
+    print(f"Total Companies processed: {len(csv_files)}")
+    print(f"Train samples: {len(train_dataset) if train_dataset else 0}")
+    print(f"Eval samples: {len(eval_dataset) if eval_dataset else 0}")
+    print(f"Test samples: {len(test_dataset) if test_dataset else 0}")
+    print("-----------------------------------")
     
     return train_dataset, eval_dataset, test_dataset
 
