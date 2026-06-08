@@ -181,7 +181,7 @@ def evaluate_model(results_dir, window_size=5, hidden_dim=32):
         plt.plot(history['val_loss'], label='Validation Loss')
         plt.title('Training vs Validation Loss')
         plt.xlabel('Epochs')
-        plt.ylabel('BCE Loss')
+        plt.ylabel('Stocktanh Loss')
         plt.legend()
         plt.grid(True)
         plt.savefig(os.path.join(plots_dir, 'loss_curve.png'))
