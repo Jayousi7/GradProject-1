@@ -1,0 +1,387 @@
+{
+    "closing_prices_2026.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/closing_prices_2026.xlsx",
+        "year": "2026",
+        "path": "bulletin_staging/raw\\2026\\closing_prices_2026.xlsx"
+    },
+    "closing_prices_2025.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/closing_prices_2025.xlsx",
+        "year": "2025",
+        "path": "bulletin_staging/raw\\2025\\closing_prices_2025.xlsx"
+    },
+    "closing_prices_2024.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/closing_prices_2024.xlsx",
+        "year": "2024",
+        "path": "bulletin_staging/raw\\2024\\closing_prices_2024.xlsx"
+    },
+    "closing_prices_2023_0.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/2024-01/closing_prices_2023_0.xlsx",
+        "year": "2023",
+        "path": "bulletin_staging/raw\\2023\\closing_prices_2023_0.xlsx"
+    },
+    "closing_prices_2022_0.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/2024-01/closing_prices_2022_0.xlsx",
+        "year": "2022",
+        "path": "bulletin_staging/raw\\2022\\closing_prices_2022_0.xlsx"
+    },
+    "closing_prices_2021_0.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/2024-01/closing_prices_2021_0.xlsx",
+        "year": "2021",
+        "path": "bulletin_staging/raw\\2021\\closing_prices_2021_0.xlsx"
+    },
+    "closing_prices_2020.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/closing_prices_2020.xlsx",
+        "year": "2020",
+        "path": "bulletin_staging/raw\\2020\\closing_prices_2020.xlsx"
+    },
+    "closing_prices_2019.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/closing_prices_2019.xlsx",
+        "year": "2019",
+        "path": "bulletin_staging/raw\\2019\\closing_prices_2019.xlsx"
+    },
+    "closing_prices_2018.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/2019-02/closing_prices_2018.xlsx",
+        "year": "2018",
+        "path": "bulletin_staging/raw\\2018\\closing_prices_2018.xlsx"
+    },
+    "Prices_2017.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/2019-02/Prices_2017.xlsx",
+        "year": "2017",
+        "path": "bulletin_staging/raw\\2017\\Prices_2017.xlsx"
+    },
+    "Prices_2016_0.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/Prices_2016_0.xlsx",
+        "year": "2016",
+        "path": "bulletin_staging/raw\\2016\\Prices_2016_0.xlsx"
+    },
+    "Prices_2015_0.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/Prices_2015_0.xlsx",
+        "year": "2015",
+        "path": "bulletin_staging/raw\\2015\\Prices_2015_0.xlsx"
+    },
+    "Prices_2014_0.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/Prices_2014_0.xlsx",
+        "year": "2014",
+        "path": "bulletin_staging/raw\\2014\\Prices_2014_0.xlsx"
+    },
+    "Prices%202013_1_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/Prices%202013_1_0.xls",
+        "year": "2020",
+        "path": "bulletin_staging/raw\\2020\\Prices%202013_1_0.xls"
+    },
+    "prices%202012_0_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/prices%202012_0_0.xls",
+        "year": "2020",
+        "path": "bulletin_staging/raw\\2020\\prices%202012_0_0.xls"
+    },
+    "Prices_2011_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/Prices_2011_0.xls",
+        "year": "2011",
+        "path": "bulletin_staging/raw\\2011\\Prices_2011_0.xls"
+    },
+    "prices_2010_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/prices_2010_0.xls",
+        "year": "2010",
+        "path": "bulletin_staging/raw\\2010\\prices_2010_0.xls"
+    },
+    "Prices_1999.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/Prices_1999.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\Prices_1999.xls"
+    },
+    "Prices_1998_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/Prices_1998_0.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\Prices_1998_0.xls"
+    },
+    "Prices_1998.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/Prices_1998.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\Prices_1998.xls"
+    },
+    "Prices_1997.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/Prices_1997.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\Prices_1997.xls"
+    },
+    "Prices_1996_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/Prices_1996_0.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\Prices_1996_0.xls"
+    },
+    "Prices_1995.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/Prices_1995.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\Prices_1995.xls"
+    },
+    "Prices_1994_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/Prices_1994_0.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\Prices_1994_0.xls"
+    },
+    "Prices_1993_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/Prices_1993_0.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\Prices_1993_0.xls"
+    },
+    "Bulletins_2025.xls": {
+        "url": "https://exchange.jo/sites/default/files/2026-01/Bulletins_2025.xls",
+        "year": "2025",
+        "path": "bulletin_staging/raw\\2025\\Bulletins_2025.xls"
+    },
+    "Right_Issue_2025.xls": {
+        "url": "https://exchange.jo/sites/default/files/2026-01/Right_Issue_2025.xls",
+        "year": "2025",
+        "path": "bulletin_staging/raw\\2025\\Right_Issue_2025.xls"
+    },
+    "Bulletin_2024.xls": {
+        "url": "https://exchange.jo/sites/default/files/2025-01/Bulletin_2024.xls",
+        "year": "2024",
+        "path": "bulletin_staging/raw\\2024\\Bulletin_2024.xls"
+    },
+    "Right_issue_2024.xls": {
+        "url": "https://exchange.jo/sites/default/files/2025-01/Right_issue_2024.xls",
+        "year": "2024",
+        "path": "bulletin_staging/raw\\2024\\Right_issue_2024.xls"
+    },
+    "Right_issue_Bulletin_2023.xls": {
+        "url": "https://exchange.jo/sites/default/files/2024-01/Right_issue_Bulletin_2023.xls",
+        "year": "2023",
+        "path": "bulletin_staging/raw\\2023\\Right_issue_Bulletin_2023.xls"
+    },
+    "Bulletin_2023.xls": {
+        "url": "https://exchange.jo/sites/default/files/2024-01/Bulletin_2023.xls",
+        "year": "2023",
+        "path": "bulletin_staging/raw\\2023\\Bulletin_2023.xls"
+    },
+    "bulletin%202022_0.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/2023-05/bulletin%202022_0.xlsx",
+        "year": "2020",
+        "path": "bulletin_staging/raw\\2020\\bulletin%202022_0.xlsx"
+    },
+    "bulletins_2021.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/2022-01/bulletins_2021.xlsx",
+        "year": "2021",
+        "path": "bulletin_staging/raw\\2021\\bulletins_2021.xlsx"
+    },
+    "Right_issue_Bulletin_2020.xls": {
+        "url": "https://exchange.jo/sites/default/files/2021-01/Right_issue_Bulletin_2020.xls",
+        "year": "2020",
+        "path": "bulletin_staging/raw\\2020\\Right_issue_Bulletin_2020.xls"
+    },
+    "Bulletin_2020.xls": {
+        "url": "https://exchange.jo/sites/default/files/2021-01/Bulletin_2020.xls",
+        "year": "2020",
+        "path": "bulletin_staging/raw\\2020\\Bulletin_2020.xls"
+    },
+    "bulletin_2019_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2020-01/bulletin_2019_0.xls",
+        "year": "2019",
+        "path": "bulletin_staging/raw\\2019\\bulletin_2019_0.xls"
+    },
+    "Right_issue_bull2019.xls": {
+        "url": "https://exchange.jo/sites/default/files/2020-01/Right_issue_bull2019.xls",
+        "year": "2019",
+        "path": "bulletin_staging/raw\\2019\\Right_issue_bull2019.xls"
+    },
+    "Bulletin_2018.xlsx": {
+        "url": "https://exchange.jo/sites/default/files/2019-05/Bulletin_2018.xlsx",
+        "year": "2018",
+        "path": "bulletin_staging/raw\\2018\\Bulletin_2018.xlsx"
+    },
+    "Right_issue2017.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/Right_issue2017.xls",
+        "year": "2017",
+        "path": "bulletin_staging/raw\\2017\\Right_issue2017.xls"
+    },
+    "bull_2017.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/bull_2017.xls",
+        "year": "2017",
+        "path": "bulletin_staging/raw\\2017\\bull_2017.xls"
+    },
+    "2016_bulls.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/2016_bulls.xls",
+        "year": "2016",
+        "path": "bulletin_staging/raw\\2016\\2016_bulls.xls"
+    },
+    "2016_right_issues.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/2016_right_issues.xls",
+        "year": "2016",
+        "path": "bulletin_staging/raw\\2016\\2016_right_issues.xls"
+    },
+    "2015_data_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/2015_data_0.xls",
+        "year": "2015",
+        "path": "bulletin_staging/raw\\2015\\2015_data_0.xls"
+    },
+    "2015_Right_Issues_bull_2015.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/2015_Right_Issues_bull_2015.xls",
+        "year": "2015",
+        "path": "bulletin_staging/raw\\2015\\2015_Right_Issues_bull_2015.xls"
+    },
+    "2014_bull_0_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/2014_bull_0_0.xls",
+        "year": "2014",
+        "path": "bulletin_staging/raw\\2014\\2014_bull_0_0.xls"
+    },
+    "2013_data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/2013_data.xls",
+        "year": "2013",
+        "path": "bulletin_staging/raw\\2013\\2013_data.xls"
+    },
+    "2012-data_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/2012-data_0.xls",
+        "year": "2012",
+        "path": "bulletin_staging/raw\\2012\\2012-data_0.xls"
+    },
+    "2011-data_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/2011-data_0.xls",
+        "year": "2011",
+        "path": "bulletin_staging/raw\\2011\\2011-data_0.xls"
+    },
+    "2010-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/2010-data.xls",
+        "year": "2010",
+        "path": "bulletin_staging/raw\\2010\\2010-data.xls"
+    },
+    "1999p-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1999p-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1999p-data.xls"
+    },
+    "1999-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1999-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1999-data.xls"
+    },
+    "1998p-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1998p-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1998p-data.xls"
+    },
+    "1998-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1998-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1998-data.xls"
+    },
+    "1998p-data_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/1998p-data_0.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1998p-data_0.xls"
+    },
+    "1997P-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1997P-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1997P-data.xls"
+    },
+    "1997-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1997-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1997-data.xls"
+    },
+    "1997P-data%20%281%29_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/1997P-data%20%281%29_0.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1997P-data%20%281%29_0.xls"
+    },
+    "1996P-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1996P-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1996P-data.xls"
+    },
+    "1996-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1996-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1996-data.xls"
+    },
+    "1996P-data_0.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-11/1996P-data_0.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1996P-data_0.xls"
+    },
+    "1995P-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1995P-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1995P-data.xls"
+    },
+    "1995-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1995-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1995-data.xls"
+    },
+    "1994P-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1994P-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1994P-data.xls"
+    },
+    "1994-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1994-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1994-data.xls"
+    },
+    "1993P-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1993P-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1993P-data.xls"
+    },
+    "1993-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1993-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1993-data.xls"
+    },
+    "1992P-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1992P-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1992P-data.xls"
+    },
+    "1992-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1992-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1992-data.xls"
+    },
+    "1991-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2019-02/1991-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1991-data.xls"
+    },
+    "1991P-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2019-02/1991P-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1991P-data.xls"
+    },
+    "1990P-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1990P-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1990P-data.xls"
+    },
+    "1989P-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1989P-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1989P-data.xls"
+    },
+    "1989-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1989-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1989-data.xls"
+    },
+    "1988P-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1988P-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1988P-data.xls"
+    },
+    "1988-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1988-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1988-data.xls"
+    },
+    "1987p-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1987p-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1987p-data.xls"
+    },
+    "1987-data.xls": {
+        "url": "https://exchange.jo/sites/default/files/2018-07/1987-data.xls",
+        "year": "unknown",
+        "path": "bulletin_staging/raw\\unknown\\1987-data.xls"
+    }
+}

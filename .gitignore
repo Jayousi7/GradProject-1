@@ -7,10 +7,17 @@ env/
 .idea/
 .vscode/
 
-# Python Cache
+# Python Cache & Jupyter
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
+.ipynb_checkpoints/
+
+# Local logs and temp files
+*.log
+*_temp.xlsx
+temp/
 
 # Project Output and Results
 results/
@@ -21,5 +28,31 @@ plots/
 training_history.json
 performance_metrics.csv
 
-# Optional: Ignore the Dataset Directory if it's too large for GitHub
-# Jordan/
+# Data-Collection Staging Directory (large source spreadsheets & bulletins)
+Data-Collection/bulletin_staging/raw/
+Data-Collection/bulletin_staging/raw_csv/
+Data-Collection/bulletin_staging/combined/
+Data-Collection/bulletin_staging/combined_bulletins.csv
+Data-Collection/bulletin_staging/combined_bulletins.parquet
+Data-Collection/bulletin_staging/combined_prices.csv
+Data-Collection/bulletin_staging/raw_csv_structure_report.txt
+
+# Data-Collection Central Pipeline Outputs Folder
+Data-Collection/data/combined_historical.csv
+Data-Collection/data/combined_historical.parquet
+Data-Collection/data/combined_historical_unified.csv
+Data-Collection/data/combined_historical_unified.parquet
+Data-Collection/data/combined_historical_with_features.csv
+Data-Collection/data/combined_historical_with_features.parquet
+Data-Collection/data/firms/
+Data-Collection/data/sample_2025_jan_march.csv
+Data-Collection/data/sample_2025_jan_march.parquet
+Data-Collection/daily_run.log
+
+# Data-Collection regional market output folders
+Data-Collection/regional_markets/ASE/
+Data-Collection/regional_markets/MENA/
+Data-Collection/regional_markets/Egypt/
+Data-Collection/regional_markets/Kuwait/
+Data-Collection/regional_markets/Qatar/
+Data-Collection/regional_markets/Saudi/
