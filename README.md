@@ -1,10 +1,10 @@
 # Event-Based Stock Movement Prediction
 
 > **Graduation Project 1 - Initial Results**
-> [Overleaf](https://www.overleaf.com/read/dfqvczhmwcgf#151812)
 This repository contains the initial results and baseline models for **Grad Proj 1**. The core objective of this project is to combine text (news headlines) and numerical data to accurately predict stock market trends.
 
 Currently, this repository holds the foundation for evaluating the numerical trading components. 
+> [Overleaf](https://www.overleaf.com/read/dfqvczhmwcgf#151812)
 
 ## Features
 - **Chronological Sequence Splitting:** To eliminate cross-sectional look-ahead bias and memory bleed, the dataset is split strictly by chronological timeline for each company (70% Train, 15% Eval, 15% Test). A strict `window_size` purge zone is enforced between slices to guarantee test features never overlap with training sequences.
