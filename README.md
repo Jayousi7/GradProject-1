@@ -1,7 +1,7 @@
 # Event-Based Stock Movement Prediction
 
 > **Graduation Project 1 - Initial Results**
-
+> [Overleaf](https://www.overleaf.com/read/dfqvczhmwcgf#151812)
 This repository contains the initial results and baseline models for **Grad Proj 1**. The core objective of this project is to combine text (news headlines) and numerical data to accurately predict stock market trends.
 
 Currently, this repository holds the foundation for evaluating the numerical trading components. 
